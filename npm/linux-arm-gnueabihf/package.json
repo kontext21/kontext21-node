@@ -1,6 +1,6 @@
 {
   "name": "@kontext21/k21-linux-arm-gnueabihf",
-  "version": "0.2.0-0",
+  "version": "0.3.0-0",
   "os": [
     "linux"
   ],
