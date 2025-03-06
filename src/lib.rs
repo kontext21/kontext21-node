@@ -9,5 +9,6 @@ pub fn plus_100(input: u32) -> u32 {
 
 #[napi]
 pub fn ping() -> String {
+  println!("ping");
   mylib::signal::utils::ping()
 }
