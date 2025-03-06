@@ -20,6 +20,12 @@ permissions:
       - .editorconfig
       - docs/**
   pull_request: null
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Manual trigger from PR'
+        required: false
+        default: 'Manual trigger from PR'
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true

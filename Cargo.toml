@@ -10,6 +10,7 @@ version = "0.1.0"
 crate-type = ["cdylib"]
 
 [dependencies]
+mylib       = { git = "https://github.com/kontext21/k21-screen.git" }
 napi        = "2"
 napi-derive = "2"
 

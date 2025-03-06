@@ -37,7 +37,7 @@ switch (platform) {
           if (localFileExisted) {
             nativeBinding = require('./k21.android-arm64.node')
           } else {
-            nativeBinding = require('k21-android-arm64')
+            nativeBinding = require('@kontext21/k21-android-arm64')
           }
         } catch (e) {
           loadError = e
@@ -49,7 +49,7 @@ switch (platform) {
           if (localFileExisted) {
             nativeBinding = require('./k21.android-arm-eabi.node')
           } else {
-            nativeBinding = require('k21-android-arm-eabi')
+            nativeBinding = require('@kontext21/k21-android-arm-eabi')
           }
         } catch (e) {
           loadError = e
@@ -62,42 +62,36 @@ switch (platform) {
   case 'win32':
     switch (arch) {
       case 'x64':
-        localFileExisted = existsSync(
-          join(__dirname, 'k21.win32-x64-msvc.node')
-        )
+        localFileExisted = existsSync(join(__dirname, 'k21.win32-x64-msvc.node'))
         try {
           if (localFileExisted) {
             nativeBinding = require('./k21.win32-x64-msvc.node')
           } else {
-            nativeBinding = require('k21-win32-x64-msvc')
+            nativeBinding = require('@kontext21/k21-win32-x64-msvc')
           }
         } catch (e) {
           loadError = e
         }
         break
       case 'ia32':
-        localFileExisted = existsSync(
-          join(__dirname, 'k21.win32-ia32-msvc.node')
-        )
+        localFileExisted = existsSync(join(__dirname, 'k21.win32-ia32-msvc.node'))
         try {
           if (localFileExisted) {
             nativeBinding = require('./k21.win32-ia32-msvc.node')
           } else {
-            nativeBinding = require('k21-win32-ia32-msvc')
+            nativeBinding = require('@kontext21/k21-win32-ia32-msvc')
           }
         } catch (e) {
           loadError = e
         }
         break
       case 'arm64':
-        localFileExisted = existsSync(
-          join(__dirname, 'k21.win32-arm64-msvc.node')
-        )
+        localFileExisted = existsSync(join(__dirname, 'k21.win32-arm64-msvc.node'))
         try {
           if (localFileExisted) {
             nativeBinding = require('./k21.win32-arm64-msvc.node')
           } else {
-            nativeBinding = require('k21-win32-arm64-msvc')
+            nativeBinding = require('@kontext21/k21-win32-arm64-msvc')
           }
         } catch (e) {
           loadError = e
@@ -113,7 +107,7 @@ switch (platform) {
       if (localFileExisted) {
         nativeBinding = require('./k21.darwin-universal.node')
       } else {
-        nativeBinding = require('k21-darwin-universal')
+        nativeBinding = require('@kontext21/k21-darwin-universal')
       }
       break
     } catch {}
@@ -124,21 +118,19 @@ switch (platform) {
           if (localFileExisted) {
             nativeBinding = require('./k21.darwin-x64.node')
           } else {
-            nativeBinding = require('k21-darwin-x64')
+            nativeBinding = require('@kontext21/k21-darwin-x64')
           }
         } catch (e) {
           loadError = e
         }
         break
       case 'arm64':
-        localFileExisted = existsSync(
-          join(__dirname, 'k21.darwin-arm64.node')
-        )
+        localFileExisted = existsSync(join(__dirname, 'k21.darwin-arm64.node'))
         try {
           if (localFileExisted) {
             nativeBinding = require('./k21.darwin-arm64.node')
           } else {
-            nativeBinding = require('k21-darwin-arm64')
+            nativeBinding = require('@kontext21/k21-darwin-arm64')
           }
         } catch (e) {
           loadError = e
@@ -157,7 +149,7 @@ switch (platform) {
       if (localFileExisted) {
         nativeBinding = require('./k21.freebsd-x64.node')
       } else {
-        nativeBinding = require('k21-freebsd-x64')
+        nativeBinding = require('@kontext21/k21-freebsd-x64')
       }
     } catch (e) {
       loadError = e
@@ -167,27 +159,23 @@ switch (platform) {
     switch (arch) {
       case 'x64':
         if (isMusl()) {
-          localFileExisted = existsSync(
-            join(__dirname, 'k21.linux-x64-musl.node')
-          )
+          localFileExisted = existsSync(join(__dirname, 'k21.linux-x64-musl.node'))
           try {
             if (localFileExisted) {
               nativeBinding = require('./k21.linux-x64-musl.node')
             } else {
-              nativeBinding = require('k21-linux-x64-musl')
+              nativeBinding = require('@kontext21/k21-linux-x64-musl')
             }
           } catch (e) {
             loadError = e
           }
         } else {
-          localFileExisted = existsSync(
-            join(__dirname, 'k21.linux-x64-gnu.node')
-          )
+          localFileExisted = existsSync(join(__dirname, 'k21.linux-x64-gnu.node'))
           try {
             if (localFileExisted) {
               nativeBinding = require('./k21.linux-x64-gnu.node')
             } else {
-              nativeBinding = require('k21-linux-x64-gnu')
+              nativeBinding = require('@kontext21/k21-linux-x64-gnu')
             }
           } catch (e) {
             loadError = e
@@ -196,27 +184,23 @@ switch (platform) {
         break
       case 'arm64':
         if (isMusl()) {
-          localFileExisted = existsSync(
-            join(__dirname, 'k21.linux-arm64-musl.node')
-          )
+          localFileExisted = existsSync(join(__dirname, 'k21.linux-arm64-musl.node'))
           try {
             if (localFileExisted) {
               nativeBinding = require('./k21.linux-arm64-musl.node')
             } else {
-              nativeBinding = require('k21-linux-arm64-musl')
+              nativeBinding = require('@kontext21/k21-linux-arm64-musl')
             }
           } catch (e) {
             loadError = e
           }
         } else {
-          localFileExisted = existsSync(
-            join(__dirname, 'k21.linux-arm64-gnu.node')
-          )
+          localFileExisted = existsSync(join(__dirname, 'k21.linux-arm64-gnu.node'))
           try {
             if (localFileExisted) {
               nativeBinding = require('./k21.linux-arm64-gnu.node')
             } else {
-              nativeBinding = require('k21-linux-arm64-gnu')
+              nativeBinding = require('@kontext21/k21-linux-arm64-gnu')
             }
           } catch (e) {
             loadError = e
@@ -225,27 +209,23 @@ switch (platform) {
         break
       case 'arm':
         if (isMusl()) {
-          localFileExisted = existsSync(
-            join(__dirname, 'k21.linux-arm-musleabihf.node')
-          )
+          localFileExisted = existsSync(join(__dirname, 'k21.linux-arm-musleabihf.node'))
           try {
             if (localFileExisted) {
               nativeBinding = require('./k21.linux-arm-musleabihf.node')
             } else {
-              nativeBinding = require('k21-linux-arm-musleabihf')
+              nativeBinding = require('@kontext21/k21-linux-arm-musleabihf')
             }
           } catch (e) {
             loadError = e
           }
         } else {
-          localFileExisted = existsSync(
-            join(__dirname, 'k21.linux-arm-gnueabihf.node')
-          )
+          localFileExisted = existsSync(join(__dirname, 'k21.linux-arm-gnueabihf.node'))
           try {
             if (localFileExisted) {
               nativeBinding = require('./k21.linux-arm-gnueabihf.node')
             } else {
-              nativeBinding = require('k21-linux-arm-gnueabihf')
+              nativeBinding = require('@kontext21/k21-linux-arm-gnueabihf')
             }
           } catch (e) {
             loadError = e
@@ -254,27 +234,23 @@ switch (platform) {
         break
       case 'riscv64':
         if (isMusl()) {
-          localFileExisted = existsSync(
-            join(__dirname, 'k21.linux-riscv64-musl.node')
-          )
+          localFileExisted = existsSync(join(__dirname, 'k21.linux-riscv64-musl.node'))
           try {
             if (localFileExisted) {
               nativeBinding = require('./k21.linux-riscv64-musl.node')
             } else {
-              nativeBinding = require('k21-linux-riscv64-musl')
+              nativeBinding = require('@kontext21/k21-linux-riscv64-musl')
             }
           } catch (e) {
             loadError = e
           }
         } else {
-          localFileExisted = existsSync(
-            join(__dirname, 'k21.linux-riscv64-gnu.node')
-          )
+          localFileExisted = existsSync(join(__dirname, 'k21.linux-riscv64-gnu.node'))
           try {
             if (localFileExisted) {
               nativeBinding = require('./k21.linux-riscv64-gnu.node')
             } else {
-              nativeBinding = require('k21-linux-riscv64-gnu')
+              nativeBinding = require('@kontext21/k21-linux-riscv64-gnu')
             }
           } catch (e) {
             loadError = e
@@ -282,14 +258,12 @@ switch (platform) {
         }
         break
       case 's390x':
-        localFileExisted = existsSync(
-          join(__dirname, 'k21.linux-s390x-gnu.node')
-        )
+        localFileExisted = existsSync(join(__dirname, 'k21.linux-s390x-gnu.node'))
         try {
           if (localFileExisted) {
             nativeBinding = require('./k21.linux-s390x-gnu.node')
           } else {
-            nativeBinding = require('k21-linux-s390x-gnu')
+            nativeBinding = require('@kontext21/k21-linux-s390x-gnu')
           }
         } catch (e) {
           loadError = e
@@ -310,6 +284,7 @@ if (!nativeBinding) {
   throw new Error(`Failed to load native binding`)
 }
 
-const { plus100 } = nativeBinding
+const { plus100, ping } = nativeBinding
 
 module.exports.plus100 = plus100
+module.exports.ping = ping
