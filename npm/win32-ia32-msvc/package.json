@@ -1,6 +1,6 @@
 {
   "name": "kontext21-win32-ia32-msvc",
-  "version": "1.0.0",
+  "version": "0.1.0-0",
   "os": [
     "win32"
   ],

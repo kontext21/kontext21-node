@@ -1,7 +1,6 @@
 {
   "name": "kontext21",
-  "version": "1.0.0",
-  "version": "0.0.1",
+  "version": "0.1.0-0",
   "description": "Node.js Library for the Kontext21 SDK",
   "main": "index.js",
   "repository": "https://github.com/kontext21/kontext21-node",
