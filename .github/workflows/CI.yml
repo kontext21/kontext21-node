@@ -22,10 +22,16 @@ permissions:
   pull_request: null
   workflow_dispatch:
     inputs:
-      reason:
-        description: 'Manual trigger from PR'
+      branch:
+        description: 'Branch to build'
         required: false
-        default: 'Manual trigger from PR'
+        default: 'yourbranch'
+        type: string
+      reason:
+        description: 'Reason for manual trigger'
+        required: false
+        default: ''
+        type: string
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -45,6 +51,8 @@ jobs:
     runs-on: ${{ matrix.settings.host }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.branch || 'main' }}
       - name: Set up Git authentication
         run: |
           git config --global url."https://${{ secrets.GH_PAT }}@github.com/".insteadOf "https://github.com/"
