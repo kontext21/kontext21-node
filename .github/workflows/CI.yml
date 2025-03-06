@@ -19,9 +19,13 @@ permissions:
       - '**/*.gitignore'
       - .editorconfig
       - docs/**
-  pull_request:
-    branches:
-      - 'main'
+  pull_request: null
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Reason for running the workflow'
+        required: false
+        default: 'Manual trigger from PR'
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
