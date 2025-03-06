@@ -1,5 +1,5 @@
 {
-  "name": "kontext21-linux-arm-gnueabihf",
+  "name": "@kontext21/k21-linux-arm-gnueabihf",
   "version": "0.2.0-0",
   "os": [
     "linux"
@@ -7,9 +7,9 @@
   "cpu": [
     "arm"
   ],
-  "main": "kontext21.linux-arm-gnueabihf.node",
+  "main": "k21.linux-arm-gnueabihf.node",
   "files": [
-    "kontext21.linux-arm-gnueabihf.node"
+    "k21.linux-arm-gnueabihf.node"
   ],
   "description": "Node.js Library for the Kontext21 SDK",
   "keywords": [

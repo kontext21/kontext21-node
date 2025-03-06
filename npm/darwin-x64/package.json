@@ -1,5 +1,5 @@
 {
-  "name": "kontext21-darwin-x64",
+  "name": "@kontext21/k21-darwin-x64",
   "version": "0.2.0-0",
   "os": [
     "darwin"
@@ -7,9 +7,9 @@
   "cpu": [
     "x64"
   ],
-  "main": "kontext21.darwin-x64.node",
+  "main": "k21.darwin-x64.node",
   "files": [
-    "kontext21.darwin-x64.node"
+    "k21.darwin-x64.node"
   ],
   "description": "Node.js Library for the Kontext21 SDK",
   "keywords": [

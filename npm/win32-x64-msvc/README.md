@@ -1,3 +1,3 @@
-# `kontext21-win32-x64-msvc`
+# `@kontext21/k21-win32-x64-msvc`
 
-This is the **x86_64-pc-windows-msvc** binary for `kontext21`
+This is the **x86_64-pc-windows-msvc** binary for `@kontext21/k21`

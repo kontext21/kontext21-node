@@ -1,5 +1,5 @@
 {
-  "name": "kontext21-linux-arm64-musl",
+  "name": "@kontext21/k21-linux-arm64-musl",
   "version": "0.2.0-0",
   "os": [
     "linux"
@@ -7,9 +7,9 @@
   "cpu": [
     "arm64"
   ],
-  "main": "kontext21.linux-arm64-musl.node",
+  "main": "k21.linux-arm64-musl.node",
   "files": [
-    "kontext21.linux-arm64-musl.node"
+    "k21.linux-arm64-musl.node"
   ],
   "description": "Node.js Library for the Kontext21 SDK",
   "keywords": [

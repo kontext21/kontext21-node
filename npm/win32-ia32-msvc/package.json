@@ -1,5 +1,5 @@
 {
-  "name": "kontext21-win32-ia32-msvc",
+  "name": "@kontext21/k21-win32-ia32-msvc",
   "version": "0.2.0-0",
   "os": [
     "win32"
@@ -7,9 +7,9 @@
   "cpu": [
     "ia32"
   ],
-  "main": "kontext21.win32-ia32-msvc.node",
+  "main": "k21.win32-ia32-msvc.node",
   "files": [
-    "kontext21.win32-ia32-msvc.node"
+    "k21.win32-ia32-msvc.node"
   ],
   "description": "Node.js Library for the Kontext21 SDK",
   "keywords": [
