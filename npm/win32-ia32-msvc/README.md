@@ -1,3 +1,3 @@
-# `@napi-rs/package-template-win32-ia32-msvc`
+# `kontext21-win32-ia32-msvc`
 
-This is the **i686-pc-windows-msvc** binary for `@napi-rs/package-template`
+This is the **i686-pc-windows-msvc** binary for `kontext21`

@@ -1,20 +1,21 @@
-# `@napi-rs/package-template`
+# Kontext21 Node.js Library
 
-![https://github.com/napi-rs/package-template/actions](https://github.com/napi-rs/package-template/workflows/CI/badge.svg)
+# Work in progress.
 
-> Template project for writing node packages with napi-rs.
+![https://github.com/kontext21/kontext21-node/actions](https://github.com/kontext21/kontext21-node/workflows/CI/badge.svg)
+
+> Based on the amazing [napi-rs/package-template](https://github.com/napi-rs/package-template) project.
+
+
 
 # Usage
 
-1. Click **Use this template**.
-2. **Clone** your project.
-3. Run `yarn install` to install dependencies.
-4. Run `npx napi rename -n [name]` command under the project folder to rename your package.
+
 
 ## Install this test package
 
 ```
-yarn add @napi-rs/package-template
+yarn add kontext21
 ```
 
 ## Support matrix
@@ -23,19 +24,7 @@ yarn add @napi-rs/package-template
 
 |                  | node14 | node16 | node18 |
 | ---------------- | ------ | ------ | ------ |
-| Windows x64      | ✓      | ✓      | ✓      |
-| Windows x32      | ✓      | ✓      | ✓      |
-| Windows arm64    | ✓      | ✓      | ✓      |
-| macOS x64        | ✓      | ✓      | ✓      |
 | macOS arm64      | ✓      | ✓      | ✓      |
-| Linux x64 gnu    | ✓      | ✓      | ✓      |
-| Linux x64 musl   | ✓      | ✓      | ✓      |
-| Linux arm gnu    | ✓      | ✓      | ✓      |
-| Linux arm64 gnu  | ✓      | ✓      | ✓      |
-| Linux arm64 musl | ✓      | ✓      | ✓      |
-| Android arm64    | ✓      | ✓      | ✓      |
-| Android armv7    | ✓      | ✓      | ✓      |
-| FreeBSD x64      | ✓      | ✓      | ✓      |
 
 ## Ability
 
@@ -103,3 +92,20 @@ git push
 ```
 
 GitHub actions will do the rest job for you.
+
+## List of modifications 
+
+1. Click **Use this template** on the top right corner of the [napi-rs/package-template](https://github.com/napi-rs/package-template) repository.
+2. **Clone** this project.
+3. Run `yarn install` to install dependencies.
+4. Run `npx napi rename -n [name]` command under the project folder to rename your package:
+```
+npx napi rename -n kontext21
+? napi name: kontext21
+? repository: Leave empty to skip https://github.com/kontext21/kontext21-node
+? description: Leave empty to skip Node.js Library for the Kontext21 SDK
+```
+5. removed other build targets except macOS arm64.
+6. Ensure you have set your NPM_TOKEN in the GitHub project setting. In Settings -> Secrets, add NPM_TOKEN into it.
+7. Run `npm version [<newversion> | major | minor | patch | premajor | preminor | prepatch | prerelease [--preid=<prerelease-id>] | from-git]` to release the package.
+8. `git push`
