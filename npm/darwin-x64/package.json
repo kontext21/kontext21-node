@@ -1,6 +1,6 @@
 {
   "name": "@kontext21/k21-darwin-x64",
-  "version": "0.12.4",
+  "version": "0.13.0-0",
   "os": [
     "darwin"
   ],
