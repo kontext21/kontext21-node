@@ -123,7 +123,7 @@ jobs:
       fail-fast: false
       matrix:
         settings:
-          # https://github.com/kontext21/kontext21-node/issues/2
+          # https://github.com/kontext21/k21-node/issues/2
           # - host: windows-latest
           #   target: x86_64-pc-windows-msvc
           #   architecture: x64

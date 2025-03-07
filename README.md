@@ -2,7 +2,7 @@
 
 # Work in progress.
 
-![https://github.com/kontext21/kontext21-node/actions](https://github.com/kontext21/kontext21-node/workflows/CI/badge.svg)
+![https://github.com/kontext21/k21-node/actions](https://github.com/kontext21/k-node/workflows/CI/badge.svg)
 
 > Based on the amazing [napi-rs/package-template](https://github.com/napi-rs/package-template) project.
 
@@ -106,7 +106,7 @@ GitHub actions will do the rest job for you.
 ```
 npx napi rename -n @kontext21/k21
 ? napi name: @kontext21/k21
-? repository: Leave empty to skip https://github.com/kontext21/kontext21-node
+? repository: Leave empty to skip https://github.com/kontext21/k21-node
 ? description: Leave empty to skip Node.js Library for the Kontext21 SDK
 ```
 5. removed other build targets except macOS arm64.
