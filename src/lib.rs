@@ -4,13 +4,18 @@ use napi_derive::napi;
 
 #[napi]
 pub fn ping() -> String {
-  println!("ping");
-  k21::signal::utils::ping()
+  "pong".to_string()
 }
 
 #[napi]
-pub async fn check_screen_capture() {
-  println!("pong");
+pub async fn check_screen_capture() -> String {
+  // Run screen capture and OCR
   let result = k21::screen_capture::utils::run_screen_capture_and_do_ocr_default().await;
-  println!("result: {:?}", result);
+
+  // Return the first element if it exists, otherwise return empty string
+  if let Some(first) = result.first() {
+    format!("{:?}", first)
+  } else {
+    "".to_string()
+  }
 }
