@@ -10,9 +10,9 @@ version = "0.1.0"
 crate-type = ["cdylib"]
 
 [dependencies]
-k21       = { git = "https://github.com/kontext21/k21.git" }
-napi        = "2"
-napi-derive = "2"
+k21         = { git = "https://github.com/kontext21/k21.git" }
+napi        = { version = "2.0.0", features = ["tokio_rt"] }
+napi-derive = "2.0.0"
 
 [build-dependencies]
 napi-build = "2"
