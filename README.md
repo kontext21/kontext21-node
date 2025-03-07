@@ -15,7 +15,7 @@
 ## Install this test package
 
 ```
-yarn add kontext21
+yarn add @kontext21/k21
 ```
 
 ## Support matrix
@@ -24,6 +24,10 @@ yarn add kontext21
 
 |                  | node14 | node16 | node18 |
 | ---------------- | ------ | ------ | ------ |
+| Windows x64      | ✓      | ✓      | ✓      |
+| Windows x32      | ✓      | ✓      | ✓      |
+| Windows arm64    | ✓      | ✓      | ✓      |
+| macOS x64        | ✓      | ✓      | ✓      |
 | macOS arm64      | ✓      | ✓      | ✓      |
 
 ## Ability
@@ -100,8 +104,8 @@ GitHub actions will do the rest job for you.
 3. Run `yarn install` to install dependencies.
 4. Run `npx napi rename -n [name]` command under the project folder to rename your package:
 ```
-npx napi rename -n kontext21
-? napi name: kontext21
+npx napi rename -n @kontext21/k21
+? napi name: @kontext21/k21
 ? repository: Leave empty to skip https://github.com/kontext21/kontext21-node
 ? description: Leave empty to skip Node.js Library for the Kontext21 SDK
 ```
