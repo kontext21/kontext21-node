@@ -83,7 +83,7 @@ pub struct FrameDataJS {
   // Add other fields you need from FrameData
 }
 
-// Convert FrameData to FrameDataJS
+// Private helper function to convert FrameData to FrameDataJS
 fn convert_frame_data(frame_data: FrameData) -> FrameDataJS {
   FrameDataJS {
     ocr_text: frame_data.ocr_text,
