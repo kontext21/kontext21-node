@@ -1,6 +1,8 @@
 use k21::{mp4_pr::utils::FrameData, screen_capture::utils::ScreenCaptureConfig};
 use napi_derive::napi;
 
+
+
 #[napi]
 pub fn ping() -> String {
   "pong".to_string()
@@ -101,4 +103,10 @@ pub async fn process_image(image_path: String) -> FrameDataJS {
 pub async fn process_video(video_path: String) -> Vec<FrameDataJS> {
   let result = k21::processor::utils::perform_ocr_on_video_path(&video_path).await;
   result.unwrap().into_iter().map(convert_frame_data).collect()
+}
+
+#[napi]
+pub async fn process_image_vision_from_path(image_path: String, url: String, api_key: String, model: String, prompt: String) -> String {
+  let result = k21::image2text::vision::utils::process_image_vision_from_path(&image_path, &url, &api_key, &model, Some(&prompt)).await;
+  result
 }

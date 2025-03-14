@@ -24,3 +24,10 @@ export interface FrameData {
 }
 export declare function processImage(imagePath: string): Promise<FrameData>
 export declare function processVideo(videoPath: string): Promise<Array<FrameData>>
+export declare function processImageVisionFromPath(
+  imagePath: string,
+  url: string,
+  apiKey: string,
+  model: string,
+  prompt: string,
+): Promise<string>
