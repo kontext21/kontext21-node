@@ -11,3 +11,16 @@ export interface OcrResult {
 }
 export declare function takeOneScreenshotAndDoOcr(): Promise<OcrResult | null>
 export declare function takeMultipleScreenshotsAndDoOcr(recordLengthInSeconds: number): Promise<Array<OcrResult>>
+export declare function recordScreenImages(fps: number, duration: number, outputDirScreenshot: string): Promise<void>
+export declare function recordScreenVideo(
+  fps: number,
+  duration: number,
+  videoChunkDurationInSeconds: number,
+  outputDirVideo: string,
+): Promise<void>
+export interface FrameData {
+  ocrText: string
+  timestamp: string
+}
+export declare function processImage(imagePath: string): Promise<FrameData>
+export declare function processVideo(videoPath: string): Promise<Array<FrameData>>

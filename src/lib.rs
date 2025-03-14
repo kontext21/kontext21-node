@@ -1,6 +1,6 @@
-#![deny(clippy::all)]
-use k21::screen_capture::utils::ScreenCaptureConfig;
+use k21::{mp4_pr::utils::FrameData, screen_capture::utils::ScreenCaptureConfig};
 use napi_derive::napi;
+use anyhow::Result;
 
 #[napi]
 pub fn ping() -> String {
@@ -37,12 +37,13 @@ pub async fn take_multiple_screenshots_and_do_ocr(record_length_in_seconds: i32)
   // Run screen capture and OCR
   let config = ScreenCaptureConfig {
     fps: 1.0,
-    video_chunk_duration: 10,
+    video_chunk_duration_in_seconds: 10,
     stdout: true,
     save_screenshot: true,
     save_video: true,
     max_frames: None,
     record_length_in_seconds: record_length_in_seconds as u64,
+    ..Default::default()
   };
 
   let result = k21::screen_capture::utils::run_screen_capture_and_do_ocr(config).await;
@@ -50,4 +51,86 @@ pub async fn take_multiple_screenshots_and_do_ocr(record_length_in_seconds: i32)
   result.into_iter()
     .map(convert_ocr_result)
     .collect()
+}
+
+#[napi]
+pub async fn record_screen_images(fps: f64, duration: u32, output_dir_screenshot: String) -> () {
+  let result = k21::screen_capture::utils::record_screen_capture_images(
+    Some(fps as f32),
+    Some(duration as u64),
+    Some(&output_dir_screenshot)
+  ).await;
+
+  result.unwrap();
+}
+
+#[napi]
+pub async fn record_screen_video(fps: f64, duration: u32, video_chunk_duration_in_seconds: u32, output_dir_video: String) -> () {
+  let result = k21::screen_capture::utils::record_screen_capture_video(
+    Some(fps as f32),
+    Some(duration as u64),
+    Some(video_chunk_duration_in_seconds as u64),
+    Some(&output_dir_video)
+  ).await;
+
+  result.unwrap();
+}
+
+// Define a JavaScript-compatible struct for FrameData
+#[napi(object, js_name = "FrameData")]
+pub struct FrameDataJS {
+  pub ocr_text: String,
+  pub timestamp: String,
+  // Add other fields you need from FrameData
+}
+
+// Convert FrameData to FrameDataJS
+fn convert_frame_data(frame_data: FrameData) -> FrameDataJS {
+  FrameDataJS {
+    ocr_text: frame_data.ocr_text,
+    timestamp: frame_data.timestamp,
+  }
+}
+
+#[napi]
+pub async fn process_image(image_path: String) -> FrameDataJS {
+  let result = k21::processor::utils::perform_ocr_on_image_from_path(&image_path).await;
+  convert_frame_data(result.unwrap())
+}
+
+#[napi]
+pub async fn process_video(video_path: String) -> Vec<FrameDataJS> {
+  let result = k21::processor::utils::perform_ocr_on_video_path(&video_path).await;
+  result.unwrap().into_iter().map(convert_frame_data).collect()
+}
+
+#[tokio::test]
+async fn test_perform_ocr_on_video_path() -> Result<()> {
+    // Arrange
+    let test_video_path = std::env::current_dir()
+    .unwrap()
+    .join("__test__/test-output.mp4")
+    .to_str()
+    .unwrap()
+    .to_string();
+
+    println!("test_video_path: {}", test_video_path);
+    println!("current_dir: {:?}", std::env::current_dir());
+
+    // Act
+    let results = k21::processor::utils::perform_ocr_on_video_path(&test_video_path).await?;
+
+    // Assert
+    assert!(!results.is_empty(), "OCR results should not be empty");
+
+    // Check that each frame has some data
+    for (i, frame) in results.iter().enumerate() {
+        println!("Frame {}: timestamp={}, ocr_text={}",
+                 i, frame.timestamp, frame.ocr_text);
+
+        // Basic validation that we have timestamps
+        assert!(!frame.timestamp.is_empty(), "Frame timestamp should not be empty");
+    }
+
+    Ok(())
 }

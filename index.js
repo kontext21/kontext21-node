@@ -284,8 +284,20 @@ if (!nativeBinding) {
   throw new Error(`Failed to load native binding`)
 }
 
-const { ping, takeOneScreenshotAndDoOcr, takeMultipleScreenshotsAndDoOcr } = nativeBinding
+const {
+  ping,
+  takeOneScreenshotAndDoOcr,
+  takeMultipleScreenshotsAndDoOcr,
+  recordScreenImages,
+  recordScreenVideo,
+  processImage,
+  processVideo,
+} = nativeBinding
 
 module.exports.ping = ping
 module.exports.takeOneScreenshotAndDoOcr = takeOneScreenshotAndDoOcr
 module.exports.takeMultipleScreenshotsAndDoOcr = takeMultipleScreenshotsAndDoOcr
+module.exports.recordScreenImages = recordScreenImages
+module.exports.recordScreenVideo = recordScreenVideo
+module.exports.processImage = processImage
+module.exports.processVideo = processVideo
