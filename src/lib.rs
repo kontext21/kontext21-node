@@ -54,7 +54,7 @@ pub async fn take_multiple_screenshots_and_do_ocr(record_length_in_seconds: i32)
 
 #[napi]
 pub async fn record_screen_images(fps: f64, duration: u32, output_dir_screenshot: String) -> () {
-  let result = k21::screen_capture::utils::record_screen_capture_images(
+  let result = k21::screen_capture::utils::capture_screen_images(
     Some(fps as f32),
     Some(duration as u64),
     Some(&output_dir_screenshot)
@@ -65,7 +65,7 @@ pub async fn record_screen_images(fps: f64, duration: u32, output_dir_screenshot
 
 #[napi]
 pub async fn record_screen_video(fps: f64, duration: u32, video_chunk_duration_in_seconds: u32, output_dir_video: String) -> () {
-  let result = k21::screen_capture::utils::record_screen_capture_video(
+  let result = k21::screen_capture::utils::capture_screen_video(
     Some(fps as f32),
     Some(duration as u64),
     Some(video_chunk_duration_in_seconds as u64),
