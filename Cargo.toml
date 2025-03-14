@@ -10,12 +10,11 @@ version = "0.1.0"
 crate-type = ["cdylib"]
 
 [dependencies]
-# k21 = { git = "https://github.com/kontext21/k21.git" }
-anyhow      = "1.0"
-k21         = { path = "../../k21/libs/k21/" }
+anyhow = "1.0"
+k21    = { git = "https://github.com/kontext21/k21.git" }
+# k21         = { path = "../../k21/libs/k21/" }
 napi        = { version = "2.0.0", features = ["tokio_rt"] }
 napi-derive = "2.0.0"
-tokio       = { version = "1", features = ["full"] }
 
 
 [build-dependencies]
@@ -23,3 +22,7 @@ napi-build = "2"
 
 [profile.release]
 lto = true
+
+[dev-dependencies]
+tempfile = "3.8"
+tokio    = { version = "1", features = ["full"] }
