@@ -293,6 +293,7 @@ const {
   processImage,
   processVideo,
   processImageVisionFromPath,
+  add,
 } = nativeBinding
 
 module.exports.ping = ping
@@ -303,3 +304,4 @@ module.exports.recordScreenVideo = recordScreenVideo
 module.exports.processImage = processImage
 module.exports.processVideo = processVideo
 module.exports.processImageVisionFromPath = processImageVisionFromPath
+module.exports.add = add

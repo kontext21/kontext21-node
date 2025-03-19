@@ -1,112 +1,68 @@
-use k21::{mp4_pr::utils::FrameData, screen_capture::utils::ScreenCaptureConfig};
-use napi_derive::napi;
+#![allow(clippy::transmute_undefined_repr)]
 
+#[macro_use]
+extern crate napi_derive;
 
+use std::path::PathBuf;
+
+pub use napi::bindgen_prelude::*;
+pub use k21::screen_capture::utils::{capture, ScreenCaptureConfig};
+
+const VERSION: &str = env!("CARGO_PKG_VERSION");
 
 #[napi]
-pub fn ping() -> String {
-  "pong".to_string()
-}
-
-#[napi(object, js_name = "OcrResult")]
-pub struct OcrResultJS {
-  pub text: String,
-  pub timestamp: String,
-  pub frame_number: i64,
-}
-
-// Private helper function to convert k21 OcrResult to our OcrResult
-fn convert_ocr_result(ocr_result: k21::screen_capture::utils::OcrResult) -> OcrResultJS {
-  OcrResultJS {
-    text: ocr_result.text.clone(),
-    timestamp: ocr_result.timestamp.clone(),
-    frame_number: ocr_result.frame_number as i64,
-  }
+pub fn version() -> &'static str {
+    VERSION
 }
 
 #[napi]
-pub async fn take_one_screenshot_and_do_ocr() -> Option<OcrResultJS> {
-  let result = k21::screen_capture::utils::run_screen_capture_and_do_ocr_default().await;
-
-  result.into_iter()
-    .next()
-    .map(convert_ocr_result)
+pub async fn add(a: i32, b: i32) -> i32 {
+  a + b
 }
 
-#[napi]
-pub async fn take_multiple_screenshots_and_do_ocr(record_length_in_seconds: i32) -> Vec<OcrResultJS> {
-  // Run screen capture and OCR
-  let config = ScreenCaptureConfig {
-    fps: 1.0,
-    video_chunk_duration_in_seconds: 10,
-    stdout: true,
-    save_screenshot: true,
-    save_video: true,
-    max_frames: None,
-    record_length_in_seconds: record_length_in_seconds as u64,
-    ..Default::default()
+#[napi(object, js_name = "JsScreenCaptureConfig")]
+pub struct JsScreenCaptureConfig {
+    #[napi(js_name = "fps")]
+    pub fps: f64,
+    #[napi(js_name = "video_chunk_duration_in_seconds")]
+    pub video_chunk_duration_in_seconds: i64,
+    #[napi(js_name = "stdout")]
+    pub stdout: bool,
+    #[napi(js_name = "save_screenshot")]
+    pub save_screenshot: bool,
+    #[napi(js_name = "save_video")]
+    pub save_video: bool,
+    #[napi(js_name = "max_frames")]
+    pub max_frames: Option<i64>,
+    #[napi(js_name = "record_length_in_seconds")]
+    pub record_length_in_seconds: i64,
+    #[napi(js_name = "output_dir_video")]
+    pub output_dir_video: Option<String>,
+    #[napi(js_name = "output_dir_screenshot")]
+    pub output_dir_screenshot: Option<String>
+}
+
+#[napi(js_name = "capture_screen")]
+pub async fn capture_screen(config: JsScreenCaptureConfig) -> () {
+  let native_config = ScreenCaptureConfig {
+    fps: config.fps as f32,
+    video_chunk_duration_in_seconds: config.video_chunk_duration_in_seconds as u64,
+    stdout: config.stdout,
+    save_screenshot: config.save_screenshot,
+    save_video: config.save_video,
+    max_frames: config.max_frames.map(|x: i64| x as u64),
+    record_length_in_seconds: config.record_length_in_seconds as u64,
+    output_dir_video: config.output_dir_video.and_then(|path| Some(PathBuf::from(path))),
+    output_dir_screenshot: config.output_dir_screenshot.and_then(|path| Some(PathBuf::from(path))),
   };
 
-  let result = k21::screen_capture::utils::run_screen_capture_and_do_ocr(config).await;
-
-  result.into_iter()
-    .map(convert_ocr_result)
-    .collect()
-}
-
-#[napi]
-pub async fn record_screen_images(fps: f64, duration: u32, output_dir_screenshot: String) -> () {
-  let result = k21::screen_capture::utils::capture_screen_images(
-    Some(fps as f32),
-    Some(duration as u64),
-    Some(&output_dir_screenshot)
-  ).await;
-
-  result.unwrap();
-}
-
-#[napi]
-pub async fn record_screen_video(fps: f64, duration: u32, video_chunk_duration_in_seconds: u32, output_dir_video: String) -> () {
-  let result = k21::screen_capture::utils::capture_screen_video(
-    Some(fps as f32),
-    Some(duration as u64),
-    Some(video_chunk_duration_in_seconds as u64),
-    Some(&output_dir_video)
-  ).await;
-
-  result.unwrap();
-}
-
-// Define a JavaScript-compatible struct for FrameData
-#[napi(object, js_name = "FrameData")]
-pub struct FrameDataJS {
-  pub ocr_text: String,
-  pub timestamp: String,
-  // Add other fields you need from FrameData
-}
-
-// Private helper function to convert FrameData to FrameDataJS
-fn convert_frame_data(frame_data: FrameData) -> FrameDataJS {
-  FrameDataJS {
-    ocr_text: frame_data.ocr_text,
-    timestamp: frame_data.timestamp,
-  }
-}
-
-#[napi]
-pub async fn process_image(image_path: String) -> FrameDataJS {
-  let result = k21::processor::utils::perform_ocr_on_image_from_path(&image_path).await;
-  convert_frame_data(result.unwrap())
-}
-
-#[napi]
-pub async fn process_video(video_path: String) -> Vec<FrameDataJS> {
-  let result = k21::processor::utils::perform_ocr_on_video_path(&video_path).await;
-  result.unwrap().into_iter().map(convert_frame_data).collect()
-}
-
-#[napi]
-pub async fn process_image_vision_from_path(image_path: String, url: String, api_key: String, model: String, prompt: String) -> String {
-  let result = k21::image2text::vision::utils::process_image_vision_from_path(&image_path, &url, &api_key, &model, Some(&prompt)).await;
-  result
+  capture(
+    Some(native_config.fps),
+    Some(native_config.record_length_in_seconds),
+    Some(native_config.save_video),
+    Some(native_config.video_chunk_duration_in_seconds),
+    Some(native_config.save_screenshot),
+    native_config.output_dir_video.as_deref(),
+    native_config.output_dir_screenshot.as_deref()
+  ).await
 }

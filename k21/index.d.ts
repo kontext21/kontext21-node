@@ -31,3 +31,4 @@ export declare function processImageVisionFromPath(
   model: string,
   prompt: string,
 ): Promise<string>
+export declare function add(a: number, b: number): Promise<number>

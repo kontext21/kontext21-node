@@ -2,20 +2,20 @@
   "name": "@kontext21/k21",
   "version": "0.17.0",
   "description": "Node.js Library for the Kontext21 SDK",
-  "main": "index.js",
+  "main": "bin/index.js",
   "repository": "https://github.com/kontext21/k21-node",
   "license": "MIT",
   "keywords": [
-    "napi-rs",
-    "NAPI",
-    "N-API",
-    "Rust",
-    "node-addon",
-    "node-addon-api"
+    "context",
+    "kontext21",
+    "AI",
+    "ocr",
+    "nodejs",
+    "rust",
+    "hyperpersonalization"
   ],
   "files": [
-    "index.d.ts",
-    "index.js"
+    "bin"
   ],
   "napi": {
     "name": "k21",
@@ -45,8 +45,10 @@
   "scripts": {
     "artifacts": "napi artifacts",
     "bench": "node --import @swc-node/register/esm-register benchmark/bench.ts",
-    "build": "napi build --platform --release",
+    "build": "napi build --platform --release k21",
+    "build:ts": "rm -rf bin; tsc -p tsconfig.build.json",
     "build:debug": "napi build --platform",
+    "cp:bin": "cp ./k21/*.node bin/",
     "format": "run-p format:prettier format:rs format:toml",
     "format:prettier": "prettier . -w",
     "format:toml": "taplo format",
