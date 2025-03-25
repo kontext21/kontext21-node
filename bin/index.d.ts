@@ -1,6 +1,5 @@
-import * as lib from './lib'
-import { K21 } from './k21'
+import * as lib from './lib';
 export declare namespace k21 {
-  export import addEnhanced = lib.addEnhanced
+    export import captureTest = lib.captureTest;
 }
-export { K21 }
+export default k21;

@@ -1,2 +1,2 @@
-export = nativeBinding
-declare let nativeBinding: null
+export = nativeBinding;
+declare let nativeBinding: null;

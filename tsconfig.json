@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "CommonJS",
+    "target": "ES2023",
+    "module": "commonjs",
     "strict": true,
     "outDir": "./bin",
     "esModuleInterop": true,
@@ -12,7 +12,15 @@
     "resolveJsonModule": true,
     "noImplicitAny": false,
     "baseUrl": "./k21",
+    "paths": {
+      "@k21": [
+        "./"
+      ],
+      "@k21/*": [
+        "./*"
+      ]
+    },
     "allowSyntheticDefaultImports": true
   },
-  "exclude": ["node_modules", "bench", "__test__"]
+  "exclude": ["node_modules"]
 }

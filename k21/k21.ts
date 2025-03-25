@@ -1,9 +1,9 @@
 import k21 from './k21_internal'
 
-export class K21 {
-  private capturer: string | null
-  private uploader: string | null
-  private processor: string | null
+export class K21Pipeline {
+  private capturer: any
+  private uploader: any
+  private processor: any
 
   constructor() {
     this.capturer = null
@@ -15,6 +15,7 @@ export class K21 {
     if (this.uploader !== null) {
       throw new Error('Cannot set Capturer when Uploader is already set')
     }
+    
     this.capturer = capturer
   }
 
@@ -38,7 +39,6 @@ export class K21 {
       const config = {
         fps: 1,
         video_chunk_duration_in_seconds: 1,
-        stdout: false,
         save_screenshot: false,
         save_video: false,
         record_length_in_seconds: 10,
@@ -64,4 +64,4 @@ export class K21 {
 }
 
 // Export default instance
-export default K21
+export default K21Pipeline
