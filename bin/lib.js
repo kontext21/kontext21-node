@@ -6,15 +6,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.captureTest = captureTest;
 const k21_internal_1 = __importDefault(require("./k21_internal"));
 async function captureTest() {
-    await k21_internal_1.default.capture_screen({
+    await k21_internal_1.default.captureScreen({
         fps: 1,
-        video_chunk_duration_in_seconds: 1,
-        stdout: false,
-        save_screenshot: false,
-        save_video: false,
-        record_length_in_seconds: 10,
-        output_dir_video: '',
-        output_dir_screenshot: '',
+        videoChunkDurationInSeconds: 1,
+        saveScreenshot: false,
+        saveVideo: false,
+        recordLengthInSeconds: 10,
+        outputDirVideo: '',
+        outputDirScreenshot: '',
     });
     return;
 }

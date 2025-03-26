@@ -5,7 +5,6 @@ use k21::capture::capture;
 pub struct JsScreenCaptureConfig {
     pub fps: f64,
     pub video_chunk_duration_in_seconds: u32,
-    pub stdout: bool,
     pub save_screenshot: bool,
     pub save_video: bool,
     pub record_length_in_seconds: u32,
@@ -18,7 +17,6 @@ impl From<ScreenCaptureConfig> for JsScreenCaptureConfig {
         Self {
             fps: config.fps as f64,
             video_chunk_duration_in_seconds: config.video_chunk_duration_in_seconds as u32,
-            stdout: config.stdout,
             save_screenshot: config.save_screenshot,
             save_video: config.save_video,
             record_length_in_seconds: config.record_length_in_seconds as u32,
@@ -33,7 +31,6 @@ impl From<JsScreenCaptureConfig> for ScreenCaptureConfig {
         Self {
             fps: config.fps as f32,
             video_chunk_duration_in_seconds: config.video_chunk_duration_in_seconds as u64,
-            stdout: config.stdout,
             save_screenshot: config.save_screenshot,
             save_video: config.save_video,
             record_length_in_seconds: config.record_length_in_seconds as u64,

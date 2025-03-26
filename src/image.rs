@@ -32,16 +32,20 @@ impl From<JsImageData> for ImageData {
 }
 
 #[napi]
-pub struct JsImageDataCollection(Vec<JsImageData>);
+pub struct JsImageDataCollection {
+    pub data: Vec<JsImageData>
+}
 
 impl From<ImageDataCollection> for JsImageDataCollection {
     fn from(collection: ImageDataCollection) -> Self {
-        JsImageDataCollection(collection.into_iter().map(|data| data.into()).collect())
+        JsImageDataCollection {
+          data: collection.into_iter().map(|data| data.into()).collect()
+        }
     }
 }
 
 impl From<JsImageDataCollection> for ImageDataCollection {
     fn from(collection: JsImageDataCollection) -> Self {
-        collection.0.into_iter().map(|data| data.into()).collect()
+        collection.data.into_iter().map(|data| data.into()).collect()
     }
 }

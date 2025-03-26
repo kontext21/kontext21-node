@@ -1,5 +1,2 @@
-import * as lib from './lib';
-export declare namespace k21 {
-    export import captureTest = lib.captureTest;
-}
-export default k21;
+import { K21Pipeline } from './k21';
+export { K21Pipeline };

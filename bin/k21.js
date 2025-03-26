@@ -3,22 +3,35 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.K21 = void 0;
+exports.K21Pipeline = void 0;
 const k21_internal_1 = __importDefault(require("./k21_internal"));
-class K21 {
+class K21Pipeline {
     capturer;
     uploader;
     processor;
+    defaultConfig = {
+        fps: 1,
+        recordLengthInSeconds: 10,
+        saveVideo: false,
+        outputDirVideo: '',
+        videoChunkDurationInSeconds: 60,
+        saveScreenshot: false,
+        outputDirScreenshot: '',
+    };
     constructor() {
         this.capturer = null;
         this.uploader = null;
         this.processor = null;
     }
-    setCapturer(capturer) {
+    setCapturer(config) {
         if (this.uploader !== null) {
             throw new Error('Cannot set Capturer when Uploader is already set');
         }
-        this.capturer = capturer;
+        let finalConfig = {
+            ...this.defaultConfig,
+            ...config
+        };
+        this.capturer = finalConfig;
     }
     setUploader(uploader) {
         if (this.capturer !== null) {
@@ -34,18 +47,13 @@ class K21 {
             throw new Error('Either Capturer or Uploader must be set');
         }
         if (this.capturer && !this.processor) {
-            const config = {
-                fps: 1,
-                video_chunk_duration_in_seconds: 1,
-                save_screenshot: false,
-                save_video: false,
-                record_length_in_seconds: 10,
-                max_frames: 10,
-                output_dir_video: '',
-                output_dir_screenshot: '',
-            };
-            k21_internal_1.default.capture_screen(config);
-            return;
+            try {
+                await k21_internal_1.default.captureScreen(this.capturer);
+                return [];
+            }
+            catch (error) {
+                throw new Error(`Screen capture failed: ${error?.message}`);
+            }
         }
         try {
             console.log('Running routine with:', {
@@ -53,12 +61,11 @@ class K21 {
                 uploader: this.uploader,
                 processor: this.processor,
             });
+            return await k21_internal_1.default.captureAndProcessScreen(this.capturer);
         }
         catch (error) {
             throw new Error(`Routine failed: ${error?.message}`);
         }
     }
 }
-exports.K21 = K21;
-// Export default instance
-exports.default = K21;
+exports.K21Pipeline = K21Pipeline;
