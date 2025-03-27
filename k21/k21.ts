@@ -60,6 +60,10 @@ class K21Pipeline {
             throw new Error('Cannot set Capturer when Uploader is already set');
         }
 
+        if (config === undefined) {
+            config = {};
+        }
+
         let finalConfig: Partial<CaptureConfig> = {
             ...this.defaultConfig,
             ...config
@@ -72,10 +76,16 @@ class K21Pipeline {
         if (this.capturer !== null) {
             throw new Error('Cannot set Uploader when Capturer is already set')
         }
+        if (uploader === undefined) {
+          uploader = {};
+      }
         this.uploader = uploader
     }
 
     setProcessor(processor: any): void {
+      if (processor === undefined) {
+        processor = {};
+      }
         this.processor = processor
     }
 

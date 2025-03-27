@@ -160,7 +160,6 @@ describe('K21Pipeline', () => {
       const recordLengthInSeconds = 5
       const videoChunkDurationInSeconds = 10
 
-
       const fullChunks = Math.floor(recordLengthInSeconds / videoChunkDurationInSeconds)
       const extraChunk = recordLengthInSeconds % videoChunkDurationInSeconds > 0 ? 1 : 0
       const expectedNumberOfMp4Files = fullChunks + extraChunk

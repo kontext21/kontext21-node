@@ -27,6 +27,9 @@ class K21Pipeline {
         if (this.uploader !== null) {
             throw new Error('Cannot set Capturer when Uploader is already set');
         }
+        if (config === undefined) {
+            config = {};
+        }
         let finalConfig = {
             ...this.defaultConfig,
             ...config
@@ -37,9 +40,15 @@ class K21Pipeline {
         if (this.capturer !== null) {
             throw new Error('Cannot set Uploader when Capturer is already set');
         }
+        if (uploader === undefined) {
+            uploader = {};
+        }
         this.uploader = uploader;
     }
     setProcessor(processor) {
+        if (processor === undefined) {
+            processor = {};
+        }
         this.processor = processor;
     }
     async run() {
@@ -61,7 +70,8 @@ class K21Pipeline {
                 uploader: this.uploader,
                 processor: this.processor,
             });
-            return await k21_internal_1.default.captureAndProcessScreen(this.capturer);
+            const result = await k21_internal_1.default.captureAndProcessScreen(this.capturer);
+            return result.data;
         }
         catch (error) {
             throw new Error(`Routine failed: ${error?.message}`);
