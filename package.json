@@ -56,7 +56,8 @@
     "lint": "oxlint .",
     "prepublishOnly": "napi prepublish -t npm",
     "test": "jest",
-    "version": "napi version"
+    "version": "napi version",
+    "bp": "yarn build && yarn build:ts && yarn cp:bin && npm pack"
   },
   "devDependencies": {
     "@napi-rs/cli": "^2.18.4",

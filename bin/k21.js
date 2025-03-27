@@ -9,7 +9,7 @@ class K21Pipeline {
     capturer;
     uploader;
     processor;
-    defaultConfig = {
+    defaultCaptureConfig = {
         fps: 1,
         recordLengthInSeconds: 10,
         saveVideo: false,
@@ -18,23 +18,42 @@ class K21Pipeline {
         saveScreenshot: false,
         outputDirScreenshot: '',
     };
+    defaultProcessorConfig = {
+        processingType: 'OCR',
+        ocrConfig: {
+            ocrModel: 'default',
+            boundingBoxes: true,
+        },
+    };
     constructor() {
         this.capturer = null;
         this.uploader = null;
         this.processor = null;
     }
-    setCapturer(config) {
+    /**
+     * Sets the screen capture configuration
+     * @param config - Optional capture configuration. If not provided, default values will be used:
+     * - fps: 1
+     * - recordLengthInSeconds: 10
+     * - saveVideo: false
+     * - outputDirVideo: ''
+     * - videoChunkDurationInSeconds: 60
+     * - saveScreenshot: false
+     * - outputDirScreenshot: ''
+     * @throws Error if uploader is already set
+     */
+    setCapturer(captureConfig) {
         if (this.uploader !== null) {
             throw new Error('Cannot set Capturer when Uploader is already set');
         }
-        if (config === undefined) {
-            config = {};
+        if (captureConfig === undefined) {
+            captureConfig = {};
         }
-        let finalConfig = {
-            ...this.defaultConfig,
-            ...config
+        const finalCaptureConfig = {
+            ...this.defaultCaptureConfig,
+            ...captureConfig
         };
-        this.capturer = finalConfig;
+        this.capturer = finalCaptureConfig;
     }
     setUploader(uploader) {
         if (this.capturer !== null) {
@@ -45,12 +64,42 @@ class K21Pipeline {
         }
         this.uploader = uploader;
     }
-    setProcessor(processor) {
-        if (processor === undefined) {
-            processor = {};
+    /**
+     * Sets the processor configuration for image processing
+     * @param processor - Configuration for processing captured images. If undefined, empty config will be used
+     * @example
+     * // Basic OCR processing
+     * pipeline.setProcessor({
+     *   processingType: "OCR",
+     * });
+     *
+     * // OCR processing
+     * pipeline.setProcessor({
+     *   processingType: "OCR",
+     *   ocrConfig: {
+     *     ocrModel: "native",
+     *     boundingBoxes: true
+     *   }
+     * });
+     */
+    setProcessor(processorConfig) {
+        if (processorConfig === undefined) {
+            processorConfig = {};
         }
-        this.processor = processor;
+        const finalProcessorConfig = {
+            ...this.defaultProcessorConfig,
+            ...processorConfig
+        };
+        this.processor = finalProcessorConfig;
     }
+    /**
+     * Executes the screen capture and processing pipeline
+     * @returns Promise<ImageData[]> Array of processed images with their metadata. Empty array if no processor is set.
+     * Each ImageData contains:
+      * - processingType: Type of processing applied
+     * @throws Error if neither capturer nor uploader is set
+     * @throws Error if screen capture or processing fails
+     */
     async run() {
         if (!this.capturer && !this.uploader) {
             throw new Error('Either Capturer or Uploader must be set');
@@ -70,7 +119,7 @@ class K21Pipeline {
                 uploader: this.uploader,
                 processor: this.processor,
             });
-            const result = await k21_internal_1.default.captureAndProcessScreen(this.capturer);
+            const result = await k21_internal_1.default.captureAndProcessScreen(this.capturer, this.processor);
             return result.data;
         }
         catch (error) {
