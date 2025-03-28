@@ -1,5 +1,5 @@
-use k21::capture::ScreenCaptureConfig;
 use k21::capture::capture;
+use k21::capture::ScreenCaptureConfig;
 
 #[napi(object)]
 pub struct JsScreenCaptureConfig {
@@ -43,6 +43,8 @@ impl From<JsScreenCaptureConfig> for ScreenCaptureConfig {
 #[napi(catch_unwind)]
 pub async fn capture_screen(config: JsScreenCaptureConfig) -> napi::Result<()> {
     let native_config: ScreenCaptureConfig = config.into();
-    capture(native_config).await.map_err(|e| napi::Error::from_reason(e.to_string()))?;
+    capture(native_config)
+        .await
+        .map_err(|e| napi::Error::from_reason(e.to_string()))?;
     Ok(())
 }

@@ -1,4 +1,7 @@
-use k21::{image2text::{OcrConfig, VisionConfig}, process::ProcessorConfig};
+use k21::{
+    image2text::{OcrConfig, VisionConfig},
+    process::ProcessorConfig,
+};
 
 #[napi(object)]
 pub struct JsProcessorConfig {

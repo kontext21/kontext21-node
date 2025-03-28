@@ -11,7 +11,7 @@ pub fn version() -> &'static str {
 }
 
 pub mod capture;
-pub mod process;
-pub mod image; 
+pub mod image;
 pub mod pipeline;
+pub mod process;
 pub mod types;
