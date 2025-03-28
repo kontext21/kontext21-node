@@ -746,10 +746,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@kontext21/k21@workspace:.":
+"@kontext21/k21@npm:^0.17.0, @kontext21/k21@workspace:.":
   version: 0.0.0-use.local
   resolution: "@kontext21/k21@workspace:."
   dependencies:
+    "@kontext21/k21": "npm:^0.17.0"
     "@napi-rs/cli": "npm:^2.18.4"
     "@swc-node/register": "npm:^1.10.6"
     "@swc/core": "npm:^1.6.13"
@@ -762,6 +763,7 @@ __metadata:
     npm-run-all2: "npm:^7.0.0"
     oxlint: "npm:^0.15.0"
     prettier: "npm:^3.3.3"
+    rimraf: "npm:^5.0.0"
     tinybench: "npm:^3.0.0"
     ts-jest: "npm:^29.3.0"
     ts-node: "npm:^10.9.2"
@@ -3844,7 +3846,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rimraf@npm:^5.0.5":
+"rimraf@npm:^5.0.0, rimraf@npm:^5.0.5":
   version: 5.0.10
   resolution: "rimraf@npm:5.0.10"
   dependencies:

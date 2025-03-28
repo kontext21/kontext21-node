@@ -46,7 +46,7 @@
     "artifacts": "napi artifacts",
     "bench": "node --import @swc-node/register/esm-register benchmark/bench.ts",
     "build": "napi build --platform --release k21",
-    "build:ts": "rm -rf bin; tsc -p tsconfig.build.json",
+    "build:ts": "rimraf bin && tsc -p tsconfig.build.json",
     "build:debug": "napi build --platform",
     "cp:bin": "cp ./k21/*.node bin/",
     "format": "run-p format:prettier format:rs format:toml",
@@ -72,6 +72,7 @@
     "npm-run-all2": "^7.0.0",
     "oxlint": "^0.15.0",
     "prettier": "^3.3.3",
+    "rimraf": "^5.0.0",
     "tinybench": "^3.0.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.3"
@@ -96,6 +97,7 @@
   },
   "packageManager": "yarn@4.6.0",
   "dependencies": {
+    "@kontext21/k21": "^0.17.0",
     "ts-jest": "^29.3.0"
   }
 }
