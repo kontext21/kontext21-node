@@ -1,8 +1,17 @@
-#![deny(clippy::all)]
+#![allow(clippy::transmute_undefined_repr)]
 
-use napi_derive::napi;
+#[macro_use]
+extern crate napi_derive;
+
+const VERSION: &str = env!("CARGO_PKG_VERSION");
 
 #[napi]
-pub fn plus_100(input: u32) -> u32 {
-  input + 100
+pub fn version() -> &'static str {
+    VERSION
 }
+
+pub mod capture;
+pub mod image;
+pub mod pipeline;
+pub mod process;
+pub mod types;

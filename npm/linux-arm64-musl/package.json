@@ -1,20 +1,17 @@
 {
-  "name": "@napi-rs/package-template-linux-arm64-musl",
-  "version": "1.0.0",
+  "name": "@kontext21/k21-linux-arm64-musl",
+  "version": "0.17.0",
   "os": [
     "linux"
   ],
   "cpu": [
     "arm64"
   ],
-  "libc": [
-    "musl"
-  ],
-  "main": "package-template.linux-arm64-musl.node",
+  "main": "k21.linux-arm64-musl.node",
   "files": [
-    "package-template.linux-arm64-musl.node"
+    "k21.linux-arm64-musl.node"
   ],
-  "description": "Template project for writing node package with napi-rs",
+  "description": "Node.js Library for the Kontext21 SDK",
   "keywords": [
     "napi-rs",
     "NAPI",
@@ -31,5 +28,8 @@
     "registry": "https://registry.npmjs.org/",
     "access": "public"
   },
-  "repository": "git@github.com:napi-rs/package-template.git"
+  "repository": "https://github.com/kontext21/k21-node",
+  "libc": [
+    "musl"
+  ]
 }
